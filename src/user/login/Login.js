@@ -67,23 +67,26 @@ import { urlPadrao } from "../../services/api";
 // }
 
 
-class LoginForm extends Component {
+export default class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            senha: ''
         };
     }
     logar = () => {
         let email = this.state.email
-        let password = this.state.password
+        let senha = this.state.senha
 
 
         urlPadrao.post(
-            "register", { email, password }).then(
-                    console.log(response)
+            "login", { email, senha }).then(res=>{
+                if(res.status==200){
+                    alert("sucesso")
                 }
+                
+            }                
             ).catch(err => console.error(err))
     }
 
@@ -114,23 +117,22 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.logar} >
+            <form >
                 <div className="form-item">
                     <input type="email" id="email" name="email"
                         className="form-control" placeholder="Email"
                         onChange={this.handleInputChange} required />
                 </div>
                 <div className="form-item">
-                    <input type="password" id="password" name="password"
+                    <input type="password" id="senha" name="senha"
                         className="form-control" placeholder="Password"
                         onChange={this.handleInputChange} required />
                 </div>
                 <div className="form-item">
-                    <button  className="btn btn-block btn-primary">Login</button>
+                    <button onClick={this.logar} type="button"  className="btn btn-block btn-primary">Login</button>
                 </div>
             </form>
         );
     }
 }
 //onClick={this.logar}
-export default LoginForm
